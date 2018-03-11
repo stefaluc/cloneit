@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+
+import Topic from './components/Topic';
+import './styles/App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      topics: {},
+      topics: [],
     };
 
     this.getTopics = async () => {
@@ -16,9 +18,30 @@ class App extends Component {
       }
       return body;
     };
+
+    this.vote = this.vote.bind(this);
   }
 
   componentDidMount() {
+    this.getTopics()
+      .then(res => this.setState({ topics: res.topics }))
+      .catch(err => console.log(err));
+  }
+
+  // send HTTP request to upvote or downvote a topic
+  async vote(id, type) {
+    const response = await fetch(`/api/topics/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ upvotes: (type === 'up') ? 1 : -1 }),
+    });
+
+    if (response.status !== 204) {
+      console.log('err in PATCH');
+    }
+
     this.getTopics()
       .then(res => this.setState({ topics: res.topics }))
       .catch(err => console.log(err));
@@ -28,12 +51,12 @@ class App extends Component {
     console.log(this.state.topics);
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {this.state.topics.map(topic =>
+          (<Topic
+            key={topic.id}
+            topic={topic}
+            vote={this.vote}
+          />))}
       </div>
     );
   }

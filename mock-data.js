@@ -1,34 +1,47 @@
 module.exports = {
   topics: [
     {
-      topidId: 1,
+      id: 1,
       title: 'Found the cliff this Clif bar came from',
       upvotes: Math.floor(Math.random() * 10000),
       comments: ['dumb', 'cool!,', 'That does not make sense!'],
     },
     {
-      topidId: 2,
+      id: 2,
       title: 'Found the cliff this Clif bar came from',
       upvotes: Math.floor(Math.random() * 10000),
       comments: ['dumb', 'cool!,', 'That does not make sense!'],
     },
     {
-      topidId: 3,
+      id: 3,
       title: 'Found the cliff this Clif bar came from',
       upvotes: Math.floor(Math.random() * 10000),
       comments: ['dumb', 'cool!,', 'That does not make sense!'],
     },
     {
-      topidId: 4,
+      id: 4,
       title: 'Found the cliff this Clif bar came from',
       upvotes: Math.floor(Math.random() * 10000),
       comments: ['dumb', 'cool!,', 'That does not make sense!'],
     },
     {
-      topidId: 5,
+      id: 5,
       title: 'Found the cliff this Clif bar came from',
       upvotes: Math.floor(Math.random() * 10000),
       comments: ['dumb', 'cool!,', 'That does not make sense!'],
     },
+    {
+      id: 6,
+      title: 'Title 1',
+      upvotes: 0,
+      comments: ['dumb', 'cool!,', 'That does not make sense!'],
+    },
+    {
+      id: 7,
+      title: 'Topic title 2',
+      upvotes: 0,
+      comments: ['dumb', 'cool!,', 'That does not make sense!'],
+    },
+
   ],
 };

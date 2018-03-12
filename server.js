@@ -1,12 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const mockData = require('./mock-data');
 
 const app = express();
 const port = process.env.PORT || 8080;
 let topicId = 40;
 
+// parse http request body
 app.use(bodyParser.json());
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.route('/api/topics')
   // GET all topics
@@ -51,5 +55,12 @@ app.route('/api/topics/:id')
     });
     res.sendStatus(204);
   });
+
+// serve create-react-app bundle in prod
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

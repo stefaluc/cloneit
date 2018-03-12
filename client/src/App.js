@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 
 import Topic from './components/Topic';
 import SubmitTopic from './components/SubmitTopic';
+import PageChange from './components/PageChange';
 import './styles/App.css';
+
+export const TOPICS_PER_PAGE = 20;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       topics: [],
+      pageNumber: 0,
     };
 
+    // send HTTP request to get all topics
     this.getTopics = async () => {
       const response = await fetch('/api/topics');
       const body = await response.json();
@@ -22,6 +27,8 @@ class App extends Component {
 
     this.vote = this.vote.bind(this);
     this.submitTopic = this.submitTopic.bind(this);
+    this.incrementPage = this.incrementPage.bind(this);
+    this.decrementPage = this.decrementPage.bind(this);
   }
 
   componentDidMount() {
@@ -70,14 +77,38 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  decrementPage() {
+    this.setState({ pageNumber: this.state.pageNumber - 1 });
+  }
+
+  incrementPage() {
+    this.setState({ pageNumber: this.state.pageNumber + 1 });
+  }
+
   render() {
+    const { topics, pageNumber } = this.state;
+
+    // keep track of topic numbers on current page
+    const firstTopicOnPage = pageNumber * TOPICS_PER_PAGE;
+    // do not let last topic number exceed topics.length
+    const temp = (pageNumber * TOPICS_PER_PAGE) + TOPICS_PER_PAGE;
+    const lastTopicOnPage = temp > topics.length ? topics.length : temp;
     return (
       <div>
         <header>
           <SubmitTopic submitTopic={this.submitTopic} />
         </header>
         <div className="container">
-          {this.state.topics.map(topic =>
+          <h3>Showing the top {firstTopicOnPage + 1}-{lastTopicOnPage} topics</h3>
+          <div className="top-right">
+            <PageChange
+              pageNumber={pageNumber}
+              onDecrement={this.decrementPage}
+              onIncrement={this.incrementPage}
+              topicsCount={topics.length}
+            />
+          </div>
+          {this.state.topics.slice(firstTopicOnPage, lastTopicOnPage).map(topic =>
             (<Topic
               key={topic.id}
               topic={topic}

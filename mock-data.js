@@ -126,5 +126,11 @@ module.exports = {
       upvotes: Math.floor(Math.random() * 10000),
       comments: ['dumb', 'cool!,', 'That does not make sense!'],
     },
+    {
+      id: 22,
+      title: 'JavaFX will be removed from the Java JDK',
+      upvotes: Math.floor(Math.random() * 10000),
+      comments: ['dumb', 'cool!,', 'That does not make sense!'],
+    },
   ],
 };

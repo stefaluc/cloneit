@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mockData = require('./mock-data');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 let topicId = 40;
 
 app.use(bodyParser.json());

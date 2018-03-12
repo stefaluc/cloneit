@@ -31,6 +31,7 @@ class App extends Component {
     this.decrementPage = this.decrementPage.bind(this);
   }
 
+  // initialize application with topics
   componentDidMount() {
     this.getTopics()
       .then(res => this.setState({ topics: res.topics }))
@@ -77,10 +78,12 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  // decrement and update page state
   decrementPage() {
     this.setState({ pageNumber: this.state.pageNumber - 1 });
   }
 
+  // increment and update page state
   incrementPage() {
     this.setState({ pageNumber: this.state.pageNumber + 1 });
   }
@@ -93,6 +96,7 @@ class App extends Component {
     // do not let last topic number exceed topics.length
     const temp = (pageNumber * TOPICS_PER_PAGE) + TOPICS_PER_PAGE;
     const lastTopicOnPage = temp > topics.length ? topics.length : temp;
+
     return (
       <div>
         <header>

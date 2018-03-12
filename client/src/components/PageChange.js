@@ -1,6 +1,8 @@
 import React from 'react';
 import { TOPICS_PER_PAGE } from '../App';
 
+// PageChange should display a back arrow if not on the first page
+// and a forward arrow if not on the front page
 const PageChange = (props) => {
   // true/false whenever or not page is first or last
   const first = !props.pageNumber

@@ -1,3 +1,4 @@
+// export an mock in-memory data structure to be used with our client application
 module.exports = {
   topics: [
     {

@@ -10,10 +10,12 @@ class Topic extends Component {
     this.downvote = this.downvote.bind(this);
   }
 
+  // bubble up click to App
   upvote() {
     this.props.vote(this.props.topic.id, 'up');
   }
 
+  // bubble up click to App
   downvote() {
     this.props.vote(this.props.topic.id, 'down');
   }

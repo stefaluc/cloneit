@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Topic from './components/Topic';
+import SubmitTopic from './components/SubmitTopic';
 import './styles/App.css';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
     };
 
     this.vote = this.vote.bind(this);
+    this.submitTopic = this.submitTopic.bind(this);
   }
 
   componentDidMount() {
@@ -42,21 +44,46 @@ class App extends Component {
       console.log('err in PATCH');
     }
 
+    // refresh topic list state
+    this.getTopics()
+      .then(res => this.setState({ topics: res.topics }))
+      .catch(err => console.log(err));
+  }
+
+  // send HTTP request to add a new topic
+  async submitTopic(title) {
+    const response = await fetch('/api/topics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title }),
+    });
+
+    if (response.status !== 200) {
+      console.log('err in POST');
+    }
+
+    // refresh topic list state
     this.getTopics()
       .then(res => this.setState({ topics: res.topics }))
       .catch(err => console.log(err));
   }
 
   render() {
-    console.log(this.state.topics);
     return (
-      <div className="App">
-        {this.state.topics.map(topic =>
-          (<Topic
-            key={topic.id}
-            topic={topic}
-            vote={this.vote}
-          />))}
+      <div>
+        <header>
+          <SubmitTopic submitTopic={this.submitTopic} />
+        </header>
+        <div className="container">
+          {this.state.topics.map(topic =>
+            (<Topic
+              key={topic.id}
+              topic={topic}
+              vote={this.vote}
+            />))}
+        </div>
       </div>
     );
   }

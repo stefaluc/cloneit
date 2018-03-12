@@ -22,7 +22,7 @@ app.route('/api/topics')
     mockData.topics = [
       ...mockData.topics,
       {
-        topicId,
+        id: topicId,
         title: req.body.title,
         upvotes: 0,
         comments: [],

@@ -29,7 +29,7 @@
   border-right: 7px solid transparent;
   border-bottom: 7px solid #555;
   cursor: pointer;
-  margin: 2px;
+  margin: 4px;
 }
 
 .topic .vote .arrow-down {
@@ -39,7 +39,7 @@
   border-right: 7px solid transparent;
   border-top: 7px solid #555;
   cursor: pointer;
-  margin: 2px;
+  margin: 4px;
 }
 
 .topic .content {

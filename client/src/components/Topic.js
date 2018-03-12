@@ -22,9 +22,9 @@ class Topic extends Component {
     return (
       <div className="topic">
         <div className="vote">
+          <div className="arrow-up" onClick={this.upvote} />
           <div>{this.props.topic.upvotes}</div>
-          <div className="arrow-up" onClick={this.upvote}></div>
-          <div className="arrow-down" onClick={this.downvote}></div>
+          <div className="arrow-down" onClick={this.downvote} />
         </div>
         <div className="content">
           {this.props.topic.title}

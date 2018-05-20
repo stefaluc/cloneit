@@ -32,5 +32,7 @@ let topics: [
   ...
 ];
 ```
+## Testing
+To run api tests, execute `npm test`. For client tests, change to the client directory and run `npm test`. Client tests should be expanded on as complexity of application grows.
 ## Code Assumptions
 The front-end portion of this application was bootstrapped together with `create-react-app`. The files under `./client/public` as well as `./client/src/registerServiceWorker.js` are boilerplate from this. Every other file has been written by myself.

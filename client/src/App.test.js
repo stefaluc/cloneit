@@ -13,10 +13,3 @@ it('renders without crashing', () => {
   );
   ReactDOM.unmountComponentAtNode(div);
 });
-
-it('GETs API data correctly', () => {
-  return fetch('/api/topics')
-    .then((data) => {
-      expect(data).toBeDefined();
-    });
-});

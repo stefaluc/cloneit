@@ -37,10 +37,10 @@ app.route('/api/topics')
     // send updated topic list to client
     res.send({ topics: mockData.topics });
   })
-  // delete all topics
+  // DELETE all topics
   .delete((req, res) => {
     mockData.topics = [];
-    res.sendStatus(204);
+    res.json({ topics: mockData.topics });
   });
 
 app.route('/api/topics/:id')
@@ -53,7 +53,7 @@ app.route('/api/topics/:id')
       }
       return topic;
     });
-    res.sendStatus(204);
+    res.json({ topics: mockData.topics });
   });
 
 // serve create-react-app bundle in prod
